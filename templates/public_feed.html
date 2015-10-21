@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Public Articles</title>
+</head>
+<body>
+    <nav>
+        {% if user.is_authenticated %}
+           Welcome {{ user.username }} || <a href="{% url 'article' %}">Create New Article</a> || <a href="{% url 'home' %}">My Articles</a> || <a href="{% url 'logout' %}">logout</a> ||
+        {% else %}
+            <a href="{% url 'login' %}">Login</a> || <a href="{% url 'signup' %}">Signup</a> ||
+        {% endif %}
+    </nav>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for msg in messages %}
+                {{ msg.message }}
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <main>
+        {% for feed in feeds %}
+            <h2><a href="{% url 'show' feed.pk %}" >{{ feed.title }} By {{ feed.owner.username }}</a> |{{ feed.comment_count }}comments</h2>
+            {{ feed.body|slice:":50" }}...
+        {% endfor %}
+    </main>
+</body>
+</html>

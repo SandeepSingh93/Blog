@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Article</title>
+</head>
+<body>
+    <nav>
+        {% if user.is_authenticated %}
+           Welcome {{ user.username }} || <a href="{% url 'article' %}">Create New Article</a> ||
+            <a href="{% url 'home' %}">My Articles</a> || <a href="{% url 'public' %}">Public Feed</a> ||
+            <a href="{% url 'logout' %}?next={{ request.path }}">logout</a> ||
+        {% else %}
+            <a href="{% url 'login' %}?next={{ request.path }}">Login</a> ||
+            <a href="{% url 'signup' %}">Signup</a> ||
+        {% endif %}
+    </nav>
+    <main>
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.body }}</p>
+        <h3>Created By: {{ article.owner.username }}  on {{ article.created_at }}</h3>
+    </main>
+</body>
+</html>
