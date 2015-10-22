@@ -7,7 +7,7 @@
 <body>
     <nav>
         {% if user.is_authenticated %}
-           Welcome {{ user.username }} || <a href="{% url 'article' %}">Create New Article</a> || <a href="{% url 'home' %}">My Articles</a> || <a href="{% url 'logout' %}">logout</a> ||
+           Welcome {{ user.username }} || <a href="{% url 'article-new' %}">Create New Article</a> || <a href="{% url 'home' %}">My Articles</a> || <a href="{% url 'logout' %}">logout</a> ||
         {% else %}
             <a href="{% url 'login' %}">Login</a> || <a href="{% url 'signup' %}">Signup</a> ||
         {% endif %}

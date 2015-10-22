@@ -1,13 +1,70 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Article</title>
+    <title>Comments</title>
+    <script src="{{ STATIC_DIR }}/static/jquery-2.1.4.min.js" ></script>
+    <script>
+        $(document).ready(function(){
+            $("#commenters").on("click", ".reply", function(event){
+                event.preventDefault();
+                var form = $("#postcomment").clone(true);
+                form.find('.parent').val($(this).parent().parent().attr('id'));
+                $(this).parent().append(form);
+            });
+        });
+    </script>
+    <style>
+        a {
+            font-weight: bold;
+            color: #ff982c;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #commenters {
+            padding-left: 0px;
+        }
+
+            #commenters li {
+                list-style-type: none;
+            }
+
+        .poster {
+            font-size: 12px;
+            color: #AAAAAA;
+        }
+
+        #postcomment ul {
+            padding-left: 0px;
+        }
+
+            #postcomment ul li {
+                list-style-type:  none;
+                padding-bottom: 5px;
+            }
+
+        #postcomment label {
+            width: 74px;
+            display: inline-block;
+        }
+
+        .c {
+            font-size: 14px;
+            background: #0E0E0E;
+            border-radius: 10px;
+            color: #FFFFFF;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
-<body>
-    <nav>
+<body><nav>
         {% if user.is_authenticated %}
-           Welcome {{ user.username }} || <a href="{% url 'article' %}">Create New Article</a> ||
+           Welcome {{ user.username }} || <a href="{% url 'article-new' %}">Create New Article</a> ||
             <a href="{% url 'home' %}">My Articles</a> || <a href="{% url 'public' %}">Public Feed</a> ||
             <a href="{% url 'logout' %}?next={{ request.path }}">logout</a> ||
         {% else %}
@@ -15,10 +72,40 @@
             <a href="{% url 'signup' %}">Signup</a> ||
         {% endif %}
     </nav>
+
     <main>
         <h2>{{ article.title }}</h2>
         <p>{{ article.body }}</p>
         <h3>Created By: {{ article.owner.username }}  on {{ article.created_at }}</h3>
+
+        {% if article.owner == user %}
+        <p><a href="{% url 'article-edit'  article.pk %}" >Edit this Article</a>  |
+        <a href="{% url 'article-delete' article.pk %}" onclick="return confirm('Are you sure you want to delete this item?');">Delete this Article</a> </p>
+        {% endif %}
+        <h4>----------------------------Comments Below---------------------------</h4>
+
+        {% if user.is_authenticated %}
+
+            <form id="postcomment" method="post" action="" class="c">
+                {{form.as_p}}
+                <p><input type="submit" value="Submit" /></p>
+                {% csrf_token %}
+            </form>
+
+            <ul id="commenters">
+            {% for comment in comment_tree %}
+                <li id="{{comment.id}}" class="c" style="margin-left:{{comment.depth|add:comment.depth}}em;">
+                    <p class="poster">{{ comment.user }} - {{comment.date}}</p>
+                    <p>{{comment.content}}</p>
+                    <p><a href="" class="reply">reply</a></p>
+                </li>
+            {% empty %}
+                <li>There are currently no comments. You can be first!</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <a href="{% url 'login' %}?next={{ request.path }}" >Login to comment</a>
+        {% endif %}
     </main>
 </body>
 </html>
