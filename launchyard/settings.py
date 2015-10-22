@@ -96,10 +96,9 @@ application = Cling(get_wsgi_application())
 #        'PORT': ''
 #    }
 #}
-DATABASES ={
-	DATABASES['default']= dj_database_url.config()
-	DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
-}
+DATABASES ={}
+DATABASES['default']= dj_database_url.config()
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
