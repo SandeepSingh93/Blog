@@ -79,9 +79,6 @@ TEMPLATES = [
 ]
 
 #WSGI_APPLICATION = 'launchyard.wsgi.application'
-from django.core.wsgi import get_wsgi_application
-from dj_static import Cling
-application = Cling(get_wsgi_application())
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
