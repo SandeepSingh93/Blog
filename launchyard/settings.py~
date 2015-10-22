@@ -79,7 +79,6 @@ TEMPLATES = [
 #WSGI_APPLICATION = 'launchyard.wsgi.application'
 
 from dj_static import Cling
-
 application = Cling(get_wsgi_application())
 
 # Database
@@ -122,3 +121,7 @@ STATIC_ROOT = ‘staticfiles’
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+
+
+SECURE_PROXY_SSL_HEADER = (‘HTTP_X_FORWARDED_PROTO’, ‘https’)

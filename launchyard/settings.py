@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 Django settings for launchyard project.
 
@@ -79,7 +81,6 @@ TEMPLATES = [
 #WSGI_APPLICATION = 'launchyard.wsgi.application'
 
 from dj_static import Cling
-
 application = Cling(get_wsgi_application())
 
 # Database
