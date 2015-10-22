@@ -86,17 +86,17 @@ application = Cling(get_wsgi_application())
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'launchyard',
-#        'USER': 'dbadmin',
-#        'PASSWORD': 'admin',
-#        'HOST': 'localhost',
-#        'PORT': ''
-#    }
-#}
-DATABASES ={}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': ''
+    }
+}
+#DATABASES ={}
 DATABASES['default']= dj_database_url.config()
 #DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
