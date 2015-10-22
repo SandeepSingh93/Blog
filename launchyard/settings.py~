@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '$7=p_hzsgpu$#44b(83%y5-e3=s)hsgr*g^l*ia41pv#_#%$vs'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['tranquil-chamber-1217.herokuapp.com']
 
@@ -96,10 +96,9 @@ application = Cling(get_wsgi_application())
 #        'PORT': ''
 #    }
 #}
-DATABASES ={
-	DATABASES['default']= dj_database_url.config()
-	DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
-}
+DATABASES ={}
+DATABASES['default']= dj_database_url.config()
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
