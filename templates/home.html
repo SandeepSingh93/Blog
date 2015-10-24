@@ -19,7 +19,7 @@
     {% endif %}
 
     <main>
-        {% for feed in feeds %}
+        {% for feed in object_list %}
             <h2><a href="{% url 'show' feed.pk %}" >{{ feed.title }} By {{ feed.owner.username }}</a> |{{ feed.comment_count }}comments</h2>
             {{ feed.body|slice:":50" }}...
         {% endfor %}

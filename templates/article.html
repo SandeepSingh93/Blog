@@ -79,8 +79,15 @@
         <h3>Created By: {{ article.owner.username }}  on {{ article.created_at }}</h3>
 
         {% if article.owner == user %}
-        <p><a href="{% url 'article-edit'  article.pk %}" >Edit this Article</a>  |
-        <a href="{% url 'article-delete' article.pk %}" onclick="return confirm('Are you sure you want to delete this item?');">Delete this Article</a> </p>
+
+        <form method="get" action="{% url 'article-edit'  article.pk %}"> {% csrf_token %}
+            <input type="submit" value="Edit this Article">
+        </form>
+
+        <form method="post" action="{% url 'article-delete' article.pk %}" onclick="return confirm('Are you sure you want to delete this item?');"> {%  csrf_token %}
+            <input type="submit" value="Delete this Article">
+        </form>
+
         {% endif %}
         <h4>----------------------------Comments Below---------------------------</h4>
 

@@ -15,19 +15,20 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from blog.views import *
 
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'blog.views.public_feed', name='public'),
+    url(r'^$', PublicFeedView.as_view(), name='public'),
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
-    url(r'^signup/', 'blog.views.create_user', name='signup'),
-    url(r'^article/new/$','blog.views.create_edit_article', name='article-new'),
-    url(r'^article/edit/(?P<id>[0-9]+)/','blog.views.create_edit_article', name='article-edit'),
-    url(r'^article/delete/(?P<id>[0-9]+)/','blog.views.delete_article', name='article-delete'),
-    url(r'^public/','blog.views.public_feed', name='public'),
-    url(r'^home/','blog.views.home_feed', name='home'),
+    url(r'^signup/', CreateUserView.as_view(), name='signup'),
+    url(r'^article/new/$',CreateArticleView.as_view(), name='article-new'),
+    url(r'^article/edit/(?P<pk>[0-9]+)/', EditArticleView.as_view(), name='article-edit'),
+    url(r'^article/delete/(?P<pk>[0-9]+)/', DeleteArticleView.as_view(), name='article-delete'),
+    url(r'^public/', PublicFeedView.as_view(), name='public'),
+    url(r'^home/', HomeFeedView.as_view(), name='home'),
     url(r'article/(?P<pk>[0-9]+)/','blog.views.show_article', name='show'),
 ]
