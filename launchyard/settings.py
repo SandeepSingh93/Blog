@@ -28,7 +28,7 @@ SECRET_KEY = '$7=p_hzsgpu$#44b(83%y5-e3=s)hsgr*g^l*ia41pv#_#%$vs'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['tranquil-chamber-1217.herokuapp.com']
+#ALLOWED_HOSTS = ['tranquil-chamber-1217.herokuapp.com']
 
 LOGIN_URL = "/login"
 
